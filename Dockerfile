@@ -12,7 +12,7 @@ FROM base AS verify
 COPY tests/ ./tests/
 COPY deploy/ ./deploy/
 COPY pyproject.toml ./
-RUN python -m ruff check app scripts tests deploy && python -m pytest -q
+RUN python -m ruff check --no-cache app scripts tests deploy && python -m pytest -q -o cache_dir=/tmp/pytest-cache
 
 FROM base AS runtime
 ARG VCS_REF=unknown
