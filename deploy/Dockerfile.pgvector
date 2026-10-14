@@ -1,0 +1,12 @@
+# Pin PG_BASE to the existing production PostgreSQL image, not a new major version.
+ARG PG_BASE
+FROM ${PG_BASE} AS build
+USER root
+RUN apk add --no-cache build-base
+COPY pgvector.tar /tmp/pgvector.tar
+RUN mkdir /tmp/vector && tar -xf /tmp/pgvector.tar -C /tmp/vector && cd /tmp/vector && make OPTFLAGS="" with_llvm=no && make with_llvm=no DESTDIR=/out install
+
+FROM ${PG_BASE}
+COPY --from=build /out/usr/local/lib/postgresql/ /usr/local/lib/postgresql/
+COPY --from=build /out/usr/local/share/postgresql/extension/ /usr/local/share/postgresql/extension/
+LABEL cxj.pgvector.version="0.8.7"

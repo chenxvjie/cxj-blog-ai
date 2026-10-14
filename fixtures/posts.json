@@ -1,0 +1,7 @@
+[
+  {"title":"[RAG测试] Docker 与直接部署的区别","slug":"rag-demo-docker","status":"PUBLISHED","content_md":"# Docker 与直接部署\n\nDocker 把应用和运行环境打包为镜像，通过容器运行。直接部署则在服务器安装 Java、Nginx 等依赖后启动程序。\n\n## 更新与回滚\n\n容器部署通过新镜像替换应用容器，旧镜像可用于应用回滚。数据库应使用独立数据卷，并在迁移前备份。切回旧镜像不会自动回滚数据库结构。"},
+  {"title":"[RAG测试] RAG 知识库问答流程","slug":"rag-demo-rag","status":"PUBLISHED","content_md":"# RAG 基本流程\n\nRAG 是检索增强生成。系统先将文章解析为段落，使用 Embedding 模型生成向量并存入 pgvector。用户提问时先检索相关段落，再让大模型依据资料生成答案。\n\n## 公开状态与引用\n\n只有已发布文章进入公开知识库。草稿、待审核投稿和下架文章不能作为答案来源。回答应引用真实文章；没有足够资料时应说明不足，不能编造。\n\n## 中文混合检索\n\n中文关键词检索适合准确技术词，向量检索适合语义相近问题，两者可以融合排序。BAAI/bge-m3 的标准稠密向量维度为1024。"},
+  {"title":"[RAG测试] 登录 Cookie 的安全配置","slug":"rag-demo-cookie","status":"PUBLISHED","content_md":"# 登录 Cookie\n\n登录会话通过 HttpOnly Cookie 保存，JavaScript 不能读取该 Cookie。生产环境应开启 Secure，通过 HTTPS 传输；SameSite 可以限制部分跨站请求场景。\n\n## 会话撤销\n\n登录保持24小时。退出登录后服务端撤销会话并清除 Cookie。修改密码或停用账号时也应撤销现有会话。Cookie 的有效期不代表服务端可以省略会话校验。"},
+  {"title":"[RAG测试] 未公开草稿","slug":"rag-demo-private","status":"DRAFT","content_md":"# 未公开资料\n\n测试专用隐藏标记 PRIVATE_DRAFT_4821，不能被问答引用。"},
+  {"title":"[RAG测试] 已下架文章","slug":"rag-demo-offline","status":"OFFLINE","content_md":"# 已下架资料\n\n测试专用隐藏标记 OFFLINE_CONTENT_9357，不能被问答引用。"}
+]

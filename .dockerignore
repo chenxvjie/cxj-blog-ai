@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+.venv
+*.log
+__pycache__
+.pytest_cache
+.ruff_cache
+
+.local
+fixtures
+release
